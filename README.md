@@ -3,11 +3,11 @@
 A CLI jump tool — register short names for paths, URLs, and files, then navigate to them instantly.
 
 ```
-l add docs ~/Documents/projects/docs
-l docs          # → cd ~/Documents/projects/docs
+j add docs ~/Documents/projects/docs
+j docs          # → cd ~/Documents/projects/docs
 
-l add gh https://github.com
-l gh            # → opens in browser
+j add gh https://github.com
+j gh            # → opens in browser
 ```
 
 ## Installation
@@ -45,17 +45,17 @@ linker init --shell powershell  # print PowerShell snippet → append to $PROFIL
 
 ## Usage
 
-All commands are invoked via the `l` shell wrapper (or `linker` directly).
+All commands are invoked via the `j` shell wrapper (or `linker` directly).
 
 ### Add an entry
 
 ```sh
-l add <name> <target>
+j add <name> <target>
 ```
 
 `<target>` can be:
 
-- A directory path — `l <name>` will `cd` into it
+- A directory path — `j <name>` will `cd` into it
 - A URL (`http://`, `https://`, `ftp://`) — opens in the default browser
 - A file path — opens with the default application
 - An executable (`.exe`, `.bat`, `.cmd` on Windows) — launches it
@@ -63,7 +63,7 @@ l add <name> <target>
 ### Jump to an entry
 
 ```sh
-l <name>
+j <name>
 ```
 
 Matching is tried in priority order:
@@ -77,19 +77,19 @@ If multiple entries match at the same priority level, the ambiguous matches are 
 ### List entries
 
 ```sh
-l list
+j list
 ```
 
 ### Edit an entry
 
 ```sh
-l edit <name> <new-target>
+j edit <name> <new-target>
 ```
 
 ### Remove an entry
 
 ```sh
-l remove <name>
+j remove <name>
 ```
 
 ## Configuration

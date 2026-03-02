@@ -77,8 +77,8 @@ setup_rc() {
   fi
 
   # l 関数（重複チェック）
-  if grep -qE '^function l\(\)|^l\(\)' "$rc"; then
-    warn "'l' 関数はすでに $rc に存在します — スキップ"
+  if grep -qE '^function j\(\)|^j\(\)' "$rc"; then
+    warn "'j' 関数はすでに $rc に存在します — スキップ"
     return 0
   fi
 

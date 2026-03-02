@@ -3,11 +3,11 @@
 CLIジャンプツール — パス、URL、ファイルを短い名前で登録し、瞬時にアクセス（移動・起動）できます。
 
 ```bash
-l add docs ~/Documents/projects/docs
-l docs          # → ~/Documents/projects/docs へ移動 (cd)
+j add docs ~/Documents/projects/docs
+j docs          # → ~/Documents/projects/docs へ移動 (cd)
 
-l add gh https://github.com
-l gh            # → ブラウザで開く
+j add gh https://github.com
+j gh            # → ブラウザで開く
 ```
 
 ## インストール
@@ -45,17 +45,17 @@ linker init --shell powershell  # PowerShell 用のスニペットを表示 → 
 
 ## 使い方
 
-すべてのコマンドは、シェルラッパーの `l`（または直接 `linker`）を介して呼び出します。
+すべてのコマンドは、シェルラッパーの `j`（または直接 `linker`）を介して呼び出します。
 
 ### エントリを追加する
 
 ```sh
-l add <名前> <ターゲット>
+j add <名前> <ターゲット>
 ```
 
 `<ターゲット>` には以下を指定できます：
 
-- **ディレクトリパス** — `l <名前>` でそのディレクトリに `cd` します
+- **ディレクトリパス** — `j <名前>` でそのディレクトリに `cd` します
 - **URL** (`http://`, `https://`, `ftp://`) — デフォルトのブラウザで開きます
 - **ファイルパス** — デフォルトのアプリケーションで開きます
 - **実行ファイル** (Windows の場合は `.exe`, `.bat`, `.cmd`) — そのまま実行します
@@ -63,7 +63,7 @@ l add <名前> <ターゲット>
 ### エントリにジャンプする
 
 ```sh
-l <名前>
+j <名前>
 ```
 
 マッチングは以下の優先順位で行われます：
@@ -77,19 +77,19 @@ l <名前>
 ### エントリを表示する
 
 ```sh
-l list
+j list
 ```
 
 ### エントリを編集する
 
 ```sh
-l edit <名前> <新しいターゲット>
+j edit <名前> <新しいターゲット>
 ```
 
 ### エントリを削除する
 
 ```sh
-l remove <名前>
+j remove <名前>
 ```
 
 ## 設定

@@ -16,7 +16,7 @@ impl Shell {
 pub fn snippet(shell: &Shell) -> &'static str {
     match shell {
         Shell::Bash => r#"# Add the following to ~/.bashrc or ~/.bash_profile:
-function l() {
+function j() {
     local output
     output=$(linker "$@")
     local code=$?
@@ -31,7 +31,7 @@ function l() {
 }
 "#,
         Shell::Powershell => r#"# Add the following to your PowerShell profile ($PROFILE):
-function l {
+function j {
     $result = & linker @args
     $code = $LASTEXITCODE
     if ($code -eq 2) {

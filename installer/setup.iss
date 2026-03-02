@@ -41,7 +41,7 @@ Name: "english";  MessagesFile: "compiler:Default.isl"
 
 [Tasks]
 Name: "addpath";      Description: "システム PATH に追加する";                          GroupDescription: "環境変数:"
-Name: "addpsprofile"; Description: "PowerShell プロファイルにシェル関数 'l' を追加する"; GroupDescription: "シェル設定:"
+Name: "addpsprofile"; Description: "PowerShell プロファイルにシェル関数 'j' を追加する"; GroupDescription: "シェル設定:"
 
 #ifndef BinDir
   #define BinDir "..\target\release"
@@ -60,12 +60,12 @@ Root: HKCU; Subkey: "Software\Linker"; ValueType: none; ValueName: "ProfileSetup
   Flags: dontcreatekey uninsdeletevalue; Tasks: addpsprofile
 
 [Code]
-{ 'l' シェル関数のスニペット。init.rs の PowerShell スニペットと同一に保つこと }
+{ 'j' シェル関数のスニペット。init.rs の PowerShell スニペットと同一に保つこと }
 function GetSnippet(): String;
 begin
   Result :=
     '# Add the following to your PowerShell profile ($PROFILE):' + #13#10 +
-    'function l {' + #13#10 +
+    'function j {' + #13#10 +
     '    $result = & linker @args' + #13#10 +
     '    $code = $LASTEXITCODE' + #13#10 +
     '    if ($code -eq 2) {' + #13#10 +
