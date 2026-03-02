@@ -60,6 +60,8 @@ j add <name> <target>
 - A file path — opens with the default application
 - An executable (`.exe`, `.bat`, `.cmd` on Windows) — launches it
 
+Relative paths (e.g. `./subdir`, `../sibling`) are automatically resolved to absolute paths based on the current working directory at registration time.
+
 ### Jump to an entry
 
 ```sh

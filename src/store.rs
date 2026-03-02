@@ -72,6 +72,7 @@ impl Store {
                 name, name
             ));
         }
+        let target = resolve_target(target);
         self.entries.push(Entry {
             name,
             target,
@@ -93,7 +94,7 @@ impl Store {
     pub fn edit(&mut self, name: &str, new_target: String) -> Result<(), String> {
         match self.entries.iter_mut().find(|e| e.name == name) {
             Some(entry) => {
-                entry.target = new_target;
+                entry.target = resolve_target(new_target);
                 Ok(())
             }
             None => Err(format!("No entry named '{}'", name)),
@@ -106,4 +107,24 @@ fn store_path() -> PathBuf {
         .unwrap_or_else(|| PathBuf::from("."))
         .join("linker")
         .join("bookmarks.json")
+}
+
+fn resolve_target(target: String) -> String {
+    if target.starts_with("http://")
+        || target.starts_with("https://")
+        || target.starts_with("ftp://")
+    {
+        return target;
+    }
+    let p = std::path::Path::new(&target);
+    if p.is_absolute() {
+        return target;
+    }
+    let base = std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
+    let joined = base.join(p);
+    joined
+        .canonicalize()
+        .unwrap_or(joined)
+        .to_string_lossy()
+        .into_owned()
 }
