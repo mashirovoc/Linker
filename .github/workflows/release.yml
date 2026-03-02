@@ -55,11 +55,11 @@ jobs:
 
       - name: Build Inno Setup installer
         if: matrix.target == 'x86_64-pc-windows-msvc'
-        shell: bash
-        run: |
-          "/c/Program Files (x86)/Inno Setup 6/ISCC.exe" \
-            '/DBinDir=..\target\x86_64-pc-windows-msvc\release' \
-            installer/setup.iss
+        shell: pwsh
+        run: >-
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe"
+          "/DBinDir=..\target\x86_64-pc-windows-msvc\release"
+          "installer\setup.iss"
 
       - name: Prepare artifacts
         shell: bash
