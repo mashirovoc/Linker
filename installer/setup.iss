@@ -43,8 +43,12 @@ Name: "english";  MessagesFile: "compiler:Default.isl"
 Name: "addpath";      Description: "システム PATH に追加する";                          GroupDescription: "環境変数:"
 Name: "addpsprofile"; Description: "PowerShell プロファイルにシェル関数 'l' を追加する"; GroupDescription: "シェル設定:"
 
+#ifndef BinDir
+  #define BinDir "..\target\release"
+#endif
+
 [Files]
-Source: "..\target\release\{#AppExe}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BinDir}\{#AppExe}"; DestDir: "{app}"; Flags: ignoreversion
 
 [Registry]
 ; システム PATH への追加 (重複チェック付き)

@@ -19,13 +19,14 @@ Download and run the installer:
 **[Linker-installer.exe](https://distribution.mashiro3.com/Linker-installer/0.1.0/Linker-installer.exe)**
 
 The installer will:
+
 - Add `linker` to your system PATH
 - Optionally add the `l` shell function to your PowerShell profile (PS5 and PS7)
 
 ### Linux / macOS / WSL
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/mashiro3/linker/main/installer/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/mashirovoc/linker/main/installer/install.sh | bash
 ```
 
 Then reload your shell:
@@ -55,6 +56,7 @@ l add <name> <target>
 ```
 
 `<target>` can be:
+
 - A directory path — `l <name>` will `cd` into it
 - A URL (`http://`, `https://`, `ftp://`) — opens in the default browser
 - A file path — opens with the default application
@@ -67,6 +69,7 @@ l <name>
 ```
 
 Matching is tried in priority order:
+
 1. **Exact** match
 2. **Prefix** match
 3. **Substring** match
@@ -94,12 +97,13 @@ l remove <name>
 ## Configuration
 
 Config file location:
+
 - Windows: `%AppData%\linker\config.toml`
 - Linux/macOS: `~/.config/linker/config.toml`
 
 ```toml
 [opener]
-url  = "default"   # command to open URLs  (e.g. "firefox")
+url  = "default"   # command to open URLs  (e.g. "chrome")
 file = "default"   # command to open files (e.g. "code")
 app  = "default"   # command to launch apps
 ```

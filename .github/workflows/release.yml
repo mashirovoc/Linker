@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 permissions:
   contents: write
@@ -16,21 +16,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Linux — musl で静的リンク (glibc バージョン非依存)
           - target: x86_64-unknown-linux-musl
             os: ubuntu-latest
             use_cross: true
           - target: aarch64-unknown-linux-musl
             os: ubuntu-latest
             use_cross: true
-          # macOS
           - target: x86_64-apple-darwin
             os: macos-13
             use_cross: false
           - target: aarch64-apple-darwin
             os: macos-latest
             use_cross: false
-          # Windows
           - target: x86_64-pc-windows-msvc
             os: windows-latest
             use_cross: false
@@ -56,20 +53,37 @@ jobs:
           fi
         shell: bash
 
-      - name: Rename binary
+      - name: Build Inno Setup installer
+        if: matrix.target == 'x86_64-pc-windows-msvc'
+        shell: bash
+        run: |
+          "/c/Program Files (x86)/Inno Setup 6/ISCC.exe" \
+            '/DBinDir=..\target\x86_64-pc-windows-msvc\release' \
+            installer/setup.iss
+
+      - name: Prepare artifacts
         shell: bash
         run: |
           BIN="target/${{ matrix.target }}/release/linker"
           [ -f "${BIN}.exe" ] && BIN="${BIN}.exe"
+
           EXT=""
           [[ "${{ matrix.target }}" == *windows* ]] && EXT=".exe"
+
           cp "$BIN" "linker-${{ matrix.target }}${EXT}"
 
-      - name: Upload artifact
+      - name: Upload binary artifact
         uses: actions/upload-artifact@v4
         with:
           name: linker-${{ matrix.target }}
           path: linker-${{ matrix.target }}*
+
+      - name: Upload installer artifact
+        if: matrix.target == 'x86_64-pc-windows-msvc'
+        uses: actions/upload-artifact@v4
+        with:
+          name: linker-installer-windows
+          path: installer/output/linker-installer-*.exe
 
   release:
     name: Create Release

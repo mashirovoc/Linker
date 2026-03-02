@@ -40,12 +40,10 @@ fn open_default(target: &str) -> std::io::Result<()> {
 #[cfg(not(any(target_os = "windows", target_os = "macos")))]
 fn open_default(target: &str) -> std::io::Result<()> {
     if is_wsl() {
-        // wslview (wslu) があれば使う
         if let Ok(mut child) = Command::new("wslview").arg(target).spawn() {
             child.wait()?;
             return Ok(());
         }
-        // フォールバック: WSL interop 経由で Windows の start コマンドを使う
         Command::new("cmd.exe")
             .args(["/c", "start", "", target])
             .spawn()?
