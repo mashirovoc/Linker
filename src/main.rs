@@ -160,7 +160,11 @@ fn main() {
                             process::exit(1);
                         }
                     } else if target_type == EntryType::Path {
-                        println!("{}", entry.target);
+                        #[cfg(windows)]
+                        let path = entry.target.strip_prefix(r"\\?\").unwrap_or(&entry.target);
+                        #[cfg(not(windows))]
+                        let path = entry.target.as_str();
+                        println!("{}", path);
                         process::exit(2);
                     } else {
                         if let Err(e) = opener::open(

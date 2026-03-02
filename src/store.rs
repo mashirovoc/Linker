@@ -23,6 +23,9 @@ impl Entry {
         if t.starts_with("http://") || t.starts_with("https://") || t.starts_with("ftp://") {
             return EntryType::Url;
         }
+        // Strip Windows extended-length prefix if present
+        #[cfg(windows)]
+        let t = &t.strip_prefix(r"\\?\").unwrap_or(t).to_owned();
         let p = std::path::Path::new(t);
         if p.is_dir() {
             EntryType::Path
@@ -122,9 +125,18 @@ fn resolve_target(target: String) -> String {
     }
     let base = std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
     let joined = base.join(p);
-    joined
-        .canonicalize()
-        .unwrap_or(joined)
-        .to_string_lossy()
-        .into_owned()
+    let resolved = joined.canonicalize().unwrap_or(joined);
+    strip_extended_prefix(resolved.to_string_lossy().into_owned())
+}
+
+/// On Windows, canonicalize() returns \\?\ prefixed extended paths.
+/// Strip the prefix so paths work with Set-Location and other tools.
+#[cfg(windows)]
+fn strip_extended_prefix(s: String) -> String {
+    s.strip_prefix(r"\\?\").unwrap_or(&s).to_owned()
+}
+
+#[cfg(not(windows))]
+fn strip_extended_prefix(s: String) -> String {
+    s
 }
