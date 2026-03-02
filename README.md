@@ -14,9 +14,9 @@ l gh            # → opens in browser
 
 ### Windows
 
-Download and run the installer:
+Download and run the installer from the [Releases page](https://github.com/mashirovoc/Linker/releases/latest):
 
-**[Linker-installer.exe](https://distribution.mashiro3.com/Linker-installer/0.1.0/Linker-installer.exe)**
+**[linker-installer-windows (GitHub Releases)](https://github.com/mashirovoc/Linker/releases/latest)**
 
 The installer will:
 
@@ -26,7 +26,7 @@ The installer will:
 ### Linux / macOS / WSL
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/mashirovoc/linker/main/installer/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/mashirovoc/Linker/main/installer/install.sh | bash
 ```
 
 Then reload your shell:

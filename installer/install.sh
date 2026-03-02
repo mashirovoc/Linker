@@ -3,7 +3,7 @@
 # Usage: curl -fsSL https://raw.githubusercontent.com/mashiro3/linker/main/installer/install.sh | bash
 set -euo pipefail
 
-REPO="mashiro3/linker"
+REPO="mashirovoc/Linker"
 BIN="linker"
 INSTALL_DIR="${HOME}/.local/bin"
 

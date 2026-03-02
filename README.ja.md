@@ -14,9 +14,9 @@ l gh            # → ブラウザで開く
 
 ### Windows
 
-インストーラーをダウンロードして実行してください：
+インストーラーを [Releases ページ](https://github.com/mashirovoc/Linker/releases/latest) からダウンロードして実行してください：
 
-**[Linker-installer.exe](https://distribution.mashiro3.com/Linker-installer/0.1.0/Linker-installer.exe)**
+**[linker-installer-windows (GitHub Releases)](https://github.com/mashirovoc/Linker/releases/latest)**
 
 インストーラーは以下の処理を行います：
 
@@ -26,7 +26,7 @@ l gh            # → ブラウザで開く
 ### Linux / macOS / WSL
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/mashirovoc/linker/main/installer/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/mashirovoc/Linker/main/installer/install.sh | bash
 ```
 
 実行後、シェルを再読み込みしてください：
