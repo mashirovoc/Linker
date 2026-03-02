@@ -66,6 +66,14 @@ j add <name> <target>
 j <name>
 ```
 
+#### Open in file explorer instead of cd
+
+```sh
+j <name> e
+```
+
+Appending `e` opens the directory in the file explorer (Explorer on Windows, Finder on macOS, `xdg-open` on Linux) instead of `cd`-ing into it.
+
 Matching is tried in priority order:
 
 1. **Exact** match

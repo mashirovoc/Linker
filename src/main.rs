@@ -144,8 +144,14 @@ fn main() {
                     process::exit(1);
                 }
                 matcher::MatchResult::One(entry) => {
+                    let open_explorer = args.get(1).map(|s| s == "e").unwrap_or(false);
                     let target_type = entry.target_type();
-                    if target_type == EntryType::Path {
+                    if target_type == EntryType::Path && open_explorer {
+                        if let Err(e) = opener::open_explorer(&entry.target) {
+                            eprintln!("Error opening Explorer: {}", e);
+                            process::exit(1);
+                        }
+                    } else if target_type == EntryType::Path {
                         println!("{}", entry.target);
                         process::exit(2);
                     } else {

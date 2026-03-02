@@ -54,6 +54,28 @@ fn open_default(target: &str) -> std::io::Result<()> {
     Ok(())
 }
 
+#[cfg(target_os = "windows")]
+pub fn open_explorer(path: &str) -> std::io::Result<()> {
+    Command::new("explorer.exe").arg(path).spawn()?.wait()?;
+    Ok(())
+}
+
+#[cfg(target_os = "macos")]
+pub fn open_explorer(path: &str) -> std::io::Result<()> {
+    Command::new("open").arg(path).spawn()?.wait()?;
+    Ok(())
+}
+
+#[cfg(not(any(target_os = "windows", target_os = "macos")))]
+pub fn open_explorer(path: &str) -> std::io::Result<()> {
+    if is_wsl() {
+        Command::new("explorer.exe").arg(path).spawn()?.wait()?;
+    } else {
+        Command::new("xdg-open").arg(path).spawn()?.wait()?;
+    }
+    Ok(())
+}
+
 #[cfg(not(any(target_os = "windows", target_os = "macos")))]
 fn is_wsl() -> bool {
     std::fs::read_to_string("/proc/version")
