@@ -24,7 +24,8 @@ struct Cli {
 enum Commands {
     Add {
         name: String,
-        target: String,
+        #[arg(num_args(1..))]
+        target: Vec<String>,
     },
     Remove {
         name: String,
@@ -32,7 +33,8 @@ enum Commands {
     List,
     Edit {
         name: String,
-        target: String,
+        #[arg(num_args(1..))]
+        target: Vec<String>,
     },
     Init {
         #[arg(long, value_enum, default_value = "detect")]
@@ -55,19 +57,22 @@ fn main() {
     let config = Config::load();
 
     match cli.command {
-        Commands::Add { name, target } => match store.add(name.clone(), target.clone()) {
-            Ok(()) => {
-                if let Err(e) = store.save() {
-                    eprintln!("Error saving bookmarks: {}", e);
+        Commands::Add { name, target } => {
+            let target = target.join(" ");
+            match store.add(name.clone(), target.clone()) {
+                Ok(()) => {
+                    if let Err(e) = store.save() {
+                        eprintln!("Error saving bookmarks: {}", e);
+                        process::exit(1);
+                    }
+                    println!("Added '{}' -> {}", name, target);
+                }
+                Err(e) => {
+                    eprintln!("Error: {}", e);
                     process::exit(1);
                 }
-                println!("Added '{}' -> {}", name, target);
             }
-            Err(e) => {
-                eprintln!("Error: {}", e);
-                process::exit(1);
-            }
-        },
+        }
 
         Commands::Remove { name } => match store.remove(&name) {
             Ok(()) => {
@@ -99,19 +104,22 @@ fn main() {
             }
         }
 
-        Commands::Edit { name, target } => match store.edit(&name, target.clone()) {
-            Ok(()) => {
-                if let Err(e) = store.save() {
-                    eprintln!("Error saving bookmarks: {}", e);
+        Commands::Edit { name, target } => {
+            let target = target.join(" ");
+            match store.edit(&name, target.clone()) {
+                Ok(()) => {
+                    if let Err(e) = store.save() {
+                        eprintln!("Error saving bookmarks: {}", e);
+                        process::exit(1);
+                    }
+                    println!("Updated '{}' -> {}", name, target);
+                }
+                Err(e) => {
+                    eprintln!("Error: {}", e);
                     process::exit(1);
                 }
-                println!("Updated '{}' -> {}", name, target);
             }
-            Err(e) => {
-                eprintln!("Error: {}", e);
-                process::exit(1);
-            }
-        },
+        }
 
         Commands::Init { shell } => {
             let s = match shell {
