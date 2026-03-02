@@ -1,0 +1,12 @@
+# Add the following to your PowerShell profile ($PROFILE):
+function j {
+    $result = & linker @args
+    $code = $LASTEXITCODE
+    if ($code -eq 2) {
+        Set-Location ($result -join "")
+    } elseif ($code -eq 0) {
+        $result
+    } else {
+        $result | ForEach-Object { Write-Error $_ }
+    }
+}
