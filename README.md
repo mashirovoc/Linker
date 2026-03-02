@@ -14,9 +14,7 @@ l gh            # → opens in browser
 
 ### Windows
 
-Download and run the installer from the [Releases page](https://github.com/mashirovoc/Linker/releases/latest):
-
-**[linker-installer-windows (GitHub Releases)](https://github.com/mashirovoc/Linker/releases/latest)**
+Download and run the installer from the **[Releases page](https://github.com/mashirovoc/Linker/releases/latest)**.
 
 The installer will:
 

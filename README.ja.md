@@ -14,9 +14,7 @@ l gh            # → ブラウザで開く
 
 ### Windows
 
-インストーラーを [Releases ページ](https://github.com/mashirovoc/Linker/releases/latest) からダウンロードして実行してください：
-
-**[linker-installer-windows (GitHub Releases)](https://github.com/mashirovoc/Linker/releases/latest)**
+**[Releases ページ](https://github.com/mashirovoc/Linker/releases/latest)** からインストーラーをダウンロードして実行してください。
 
 インストーラーは以下の処理を行います：
 
